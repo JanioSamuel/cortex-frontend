@@ -1,0 +1,44 @@
+.editor {
+  width: 80%;
+  margin-top: 50px;
+}
+
+.titulo-criterio {
+  margin-top: 50px;
+}
+
+.titulo-criterio h1 {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+.tags {
+  width: 80%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.tags input {
+  border: 1px solid #ddd;
+  width: 400px;
+  border-radius: 2px;
+  height: 42px;
+  padding: 0 15px;
+  font-size: 16px;
+  color: #a6a6a6;
+}
+
+.tags button {
+  border: 0;
+  border-radius: 2px;
+  width: 200px;
+  height: 42px;
+  padding: 0 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background: #6666ff;
+  color: #FFF;
+  cursor: pointer;
+  margin-left: 30px;
+}

@@ -1,0 +1,85 @@
+.apresentacao {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 400px);
+  justify-content: center;
+  gap: 30px;
+}
+
+.markdown {
+  width: 400px;
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.icon {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.icon .fa-copy {
+  cursor: pointer;
+}
+
+.icon .fa-copy:hover {
+  color: #ddd !important;
+}
+
+.icon:focus {
+  outline: 0;
+}
+
+.label-tags {
+  height: 20px;
+  width: 400px;
+  padding-left: 10px;
+  background-color: #ddd;
+}
+
+.label-tags label {
+  font-family: 'Montserrat';
+  text-transform: uppercase;
+  font-size: 10px;
+}
+
+.search {
+  margin-top: 50px;
+}
+
+.search input {
+  border: 1px solid #ddd;
+  width: 400px;
+  border-radius: 2px;
+  height: 42px;
+  padding: 0 15px;
+  font-size: 16px;
+}
+
+.search button {
+  border: 0;
+  border-radius: 2px;
+  width: 200px;
+  height: 42px;
+  padding: 0 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background: #6666ff;
+  color: #FFF;
+  cursor: pointer;
+  margin-left: 30px;
+}
+
+.resultados {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 90%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.resultados label {
+  font-family: 'Montserrat';
+  text-transform: uppercase;
+  font-size: 12px;
+}
