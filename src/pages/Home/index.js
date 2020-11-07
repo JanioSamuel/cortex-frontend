@@ -8,14 +8,22 @@ import { faCopy } from '@fortawesome/free-solid-svg-icons'
 import api from '../../services/api';
 
 import './styles.css'
-import { Link } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+
 export default function Home() {
   const [criterios, setCriterios] = useState([]);
   const [count, setCount] = useState(0);
   const [tags, setTags] = useState('');
+  const [grupos, setGrupos] = useState([]);
+  const [grupoSelecionado, setGrupoSelecionado] = useState('');
 
   useEffect(() => {
     async function loadCriterios() {
+      const grupoResponse = await api.get('/grupo');
+      console.log(grupoResponse.data);
+      setGrupos(grupoResponse.data);
+      setGrupoSelecionado(grupoResponse.data[0].id);
+
       const response = await api.get('/criterio');
       setCriterios(() => response.data.dataValues);
       setCount(() => response.data.count);
@@ -35,37 +43,35 @@ export default function Home() {
 
   async function onHandleSubmit(e) {
     e.preventDefault();
-    if (tags === '') {
-      alert('É obrigatório informar uma tag');
-    } else {
-      const response = await api.get('/criterio', {
-        params: {
-          tag: tags
-        }
-      });
-      console.log(response.data.dataValues);
-      setCriterios(() => response.data.dataValues);
-      setCount(() => response.data.count);
-    }
+    const response = await api.get('/criterio', {
+      params: {
+        tag: tags,
+        grupo: grupoSelecionado
+      }
+    });
+    console.log(response.data.dataValues);
+    setCriterios(() => response.data.dataValues);
+    setCount(() => response.data.count);
   }
   return (
     <>
-      <div className="nav">
-        <Link to="novo-criterio">
-          <button>Novo</button>
-        </Link>
-        <Link to="/">
-          <button>Critérios</button>
-        </Link>
-      </div>
+      <Navbar />
 
       <form className="search" onSubmit={onHandleSubmit}>
+        <label>Tag</label>
         <input
           type="text"
           placeholder="Insira a tag aqui"
           value={tags}
           onChange={e => setTags(e.target.value)}
         />
+        <label>Grupo</label>
+        <select onChange={e => setGrupoSelecionado(e.target.value)}>
+          <option disabled selected>Selecione um grupo</option>
+          {grupos.map(gr => (
+            <option value={gr.id}>{gr.nome}</option>
+          ))}
+        </select>
         <button type="submit">Buscar</button>
       </form>
       <div className="resultados">
@@ -81,6 +87,7 @@ export default function Home() {
               </div>
             </div>
             <div className="label-tags">
+              <label>Grupo: {criterio.Grupo.nome}</label>
               <label>Tags: {criterio.tags}</label>
             </div>
           </li>
